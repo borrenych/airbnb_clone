@@ -1,6 +1,21 @@
 <h1 align="center">Tenements</h1>
 <p align="center"><%= link_to 'Add new tenement', new_tenement_path(@tenement) %></td></p><br>
 
+<input type="text" id="region" placeholder="Find by region">
+<input type="number" id="price" placeholder="Max price">
+<input type="number" id="guests" placeholder="Guests">
+arrive: <input type="date" id="inputArrive" placeholder="Arrive">
+departure: <input type="date" id="inputDeparture" placeholder="Departure">
+
+<select id="type">
+  <option disabled selected value="">Property type</option>
+  <% @types.each do |type| %>
+    <option><%= type&.first %></option>
+  <% end %>
+</select>
+
+<button type="button" onclick="filterTenements()">Select</button>
+
 <% @tenements.each do |tenement| %>
   <p align="center"><%=  link_to tenement.title, tenement %></p>
   <p align="center"> <%= "Region: #{tenement.region}" %></p>
@@ -8,3 +23,15 @@
   <p align="center"><%= "Max guests: #{tenement.guests}" %></p>
   <p align="center"><%= "Property_type: #{tenement.property_type.name}" %></p><br><hr>
 <% end %>
+
+<script>
+  function filterTenements(){
+    let region = document.getElementsByTagName('input')[0].value
+    let price = document.getElementsByTagName('input')[1].value
+    let guests = document.getElementsByTagName('input')[2].value
+    let type = document.getElementsByTagName('select')[0].value
+    let arrive = document.getElementsByTagName('input')[3].value
+    let departure = document.getElementsByTagName('input')[4].value
+    window.location.replace(`http://${window.location.host}/tenements/?price=${price}&guests=${guests}&property_type_id=${type}&region=${region}&arrive=${arrive}&departure=${departure}`)
+  }
+</script>

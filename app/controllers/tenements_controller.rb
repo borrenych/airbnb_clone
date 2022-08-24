@@ -6,6 +6,13 @@ class TenementsController < ApplicationController
 
   def index
     @tenements = Tenement.all
+    filtering_params(params).each do |key, value|
+      @tenements = @tenements.public_send("filter_by_#{key}", value) if value.present?
+    end
+    if params[:arrive].present? && params[:departure].present?
+      @tenements = AvailableByDatesTenementsGetter.call(@tenements, params[:arrive],
+                                                        params[:departure])
+    end
   end
 
   def new
@@ -33,5 +40,9 @@ class TenementsController < ApplicationController
 
   def tenements_params
     params.require(:tenement).permit(:title, :description, :price, :guests, :region, :property_type_id, :user_id)
+  end
+
+  def filtering_params(params)
+    params.slice(:price, :guests, :property_type_id, :region)
   end
 end
