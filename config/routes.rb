@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
-  root to: "tenements#index"
+  root to: 'tenements#index'
 
-  resources :tenements
-  resources :bookings
+  resources :tenements, only: %i[index show]
+  resources :bookings, only: %i[index create destroy]
 
   namespace :hosting do
-    resources :tenements
+    resources :tenements, only: %i[index new create show destroy]
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

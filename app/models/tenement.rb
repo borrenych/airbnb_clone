@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Tenement < ApplicationRecord
   belongs_to :property_type
   has_many :bookings, dependent: :destroy

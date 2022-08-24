@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TenementsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[show]
   before_action :property_types, only: %i[index]
 
   def index

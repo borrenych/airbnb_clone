@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class BookingsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @bookings = Booking.where(user_id: current_user.id)
   end

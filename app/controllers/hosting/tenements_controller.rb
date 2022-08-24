@@ -3,13 +3,13 @@
 module Hosting
   class TenementsController < ApplicationController
     before_action :authenticate_user!
-    before_action :property_types, only: %i[index new create]
 
     def index
       @tenements = Tenement.where(user_id: current_user.id)
     end
 
     def new
+      @types = PropertyType.all.pluck(:name, :id)
       @tenement = Tenement.new
     end
 
@@ -34,10 +34,6 @@ module Hosting
     end
 
     private
-
-    def property_types
-      @types = PropertyType.all.pluck(:name, :id)
-    end
 
     def tenements_params
       params.require(:tenement).permit(:title, :description, :price, :guests, :region, :property_type_id, :user_id)
