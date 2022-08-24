@@ -1,20 +1,23 @@
+<%= render 'layouts/guest_menu' %>
 <h1 align="center">Tenements</h1>
-<p align="center"><%= link_to 'Add new tenement', new_tenement_path(@tenement) %></td></p><br>
 
-<input type="text" id="region" placeholder="Find by region">
-<input type="number" id="price" placeholder="Max price">
-<input type="number" id="guests" placeholder="Guests">
+<input type="text" placeholder="Find by region">
+<input type="number" placeholder="Max price">
+<input type="number" placeholder="Guests">
 arrive: <input type="date" id="inputArrive" placeholder="Arrive">
 departure: <input type="date" id="inputDeparture" placeholder="Departure">
 
-<select id="type">
+
+<select>
   <option disabled selected value="">Property type</option>
   <% @types.each do |type| %>
     <option><%= type&.first %></option>
   <% end %>
 </select>
 
+
 <button type="button" onclick="filterTenements()">Select</button>
+</h3>
 
 <% @tenements.each do |tenement| %>
   <p align="center"><%=  link_to tenement.title, tenement %></p>

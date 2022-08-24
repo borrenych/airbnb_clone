@@ -16,10 +16,12 @@ class Booking < ApplicationRecord
 
   def already_reserved
     bookings = Booking.where(tenement_id: tenement_id)
+    booking_range = arrive..departure
     date_ranges = bookings.map { |booking| booking.arrive..booking.departure }
 
     date_ranges.each do |range|
       errors.add(:tenement, 'already reserved by another') if range.include?(arrive) || range.include?(departure)
+      errors.add(:tenement, 'already reserved by another') if range.in?(booking_range)
     end
   end
 end

@@ -1,0 +1,11 @@
+<%= render 'layouts/hosting_menu' %>
+<h1 align="center">My Tenements</h1>
+<p align="center"><%= link_to 'Add new tenement', new_hosting_tenement_path(@tenement) %></td></p><br>
+
+<% @tenements.each do |tenement| %>
+  <p align="center"><%=  link_to tenement.title, hosting_tenement_url(tenement) %></p>
+  <p align="center"> <%= "Region: #{tenement.region}" %></p>
+  <p align="center"><%= "Price: #{tenement.price} $/day" %></p>
+  <p align="center"><%= "Max guests: #{tenement.guests}" %></p>
+  <p align="center"><%= "Property_type: #{tenement.property_type.name}" %></p><br><hr>
+<% end %>

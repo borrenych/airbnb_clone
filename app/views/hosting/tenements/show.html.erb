@@ -1,0 +1,38 @@
+<%= render 'layouts/hosting_menu' %>
+<h1><%= @tenement.title %></h1>
+
+<p>
+  <strong>Region:</strong>
+  <%= @tenement.region %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= "#{@tenement.price} $/day" %>
+</p>
+
+<p>
+  <strong>Max Guests:</strong>
+  <%= @tenement.guests %>
+</p>
+
+<p>
+  <strong>Property type:</strong>
+  <%= @tenement.property_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @tenement.description %>
+</p>
+
+<p><%= link_to 'Destroy', hosting_tenement_path(@tenement), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+<hr>
+
+<strong>Tenement bookings:</strong>
+<% @bookings.each do |booking| %>
+  <p>
+    <%= "From: #{booking.arrive} To: #{booking.departure} by #{booking.user.email}" %>
+    <%= link_to 'Destroy', booking_path(booking), method: :delete, data: { confirm: 'Are you sure?'} %>
+  </p>
+<% end %>
