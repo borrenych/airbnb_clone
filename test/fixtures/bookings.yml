@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tenement: one
+  user: one
+  arrive: 2022-08-24
+  departure: 2022-08-24
+
+two:
+  tenement: two
+  user: two
+  arrive: 2022-08-24
+  departure: 2022-08-24

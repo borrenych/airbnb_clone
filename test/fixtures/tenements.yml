@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  price: 
+  guests: 1
+  region: MyString
+  user: one
+  property_type: one
+
+two:
+  title: MyString
+  description: MyText
+  price: 
+  guests: 1
+  region: MyString
+  user: two
+  property_type: two
