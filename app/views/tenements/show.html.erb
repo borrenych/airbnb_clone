@@ -1,0 +1,26 @@
+<h1><%= @tenement.title %></h1>
+
+<p>
+  <strong>Region:</strong>
+  <%= @tenement.region %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= "#{@tenement.price} $/day" %>
+</p>
+
+<p>
+  <strong>Max Guests:</strong>
+  <%= @tenement.guests %>
+</p>
+
+<p>
+  <strong>Property type:</strong>
+  <%= @tenement.property_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @tenement.description %>
+</p>
