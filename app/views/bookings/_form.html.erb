@@ -1,0 +1,21 @@
+<%= form_with(model: booking) do |form| %>
+
+  <div class="field">
+    <%= form.label :arrive %>
+    <%= form.date_select :arrive %>
+  </div>
+
+  <div class="field">
+    <%= form.label :departure %>
+    <%= form.date_select :departure %>
+  </div>
+
+  <div hidden class="field">
+    <%= form.label :tenement_id %>
+    <%= form.text_field :tenement_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
