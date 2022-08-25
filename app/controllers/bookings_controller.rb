@@ -7,8 +7,7 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(booking_params)
-    @booking.user = current_user
+    @booking = current_user.bookings.new(booking_params)
 
     redirect_to tenement_path(@booking.tenement_id), notice: 'Success' and return if @booking.save
 
@@ -16,8 +15,8 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-    booking = Booking.find(params[:id])
-    booking.destroy if booking.user_id == current_user.id
+    booking = current_user.bookings.find(params[:id])
+    booking.destroy
 
     redirect_to bookings_url, notice: booking.errors.first || 'Success'
   end
@@ -25,6 +24,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:arrive, :departure, :tenement_id, :user_id)
+    params.require(:booking).permit(:arrive, :departure, :tenement_id)
   end
 end

@@ -5,7 +5,7 @@ module Hosting
     before_action :authenticate_user!
 
     def index
-      @tenements = Tenement.where(user_id: current_user.id)
+      @tenements = current_user.tenements
     end
 
     def new
@@ -14,8 +14,8 @@ module Hosting
     end
 
     def create
-      @tenement = Tenement.new(tenements_params)
-      @tenement.user_id = current_user.id
+      @tenement = current_user.tenements.new(tenements_params)
+
       redirect_to hosting_tenements_path, notice: 'Success' and return if @tenement.save
 
       redirect_to new_hosting_tenement_path, alert: @tenement.errors
@@ -27,8 +27,8 @@ module Hosting
     end
 
     def destroy
-      tenement = Tenement.find(params[:id])
-      tenement.destroy if tenement.user_id == current_user.id
+      tenement = current_user.tenements.find(params[:id])
+      tenement.destroy
 
       redirect_to hosting_tenements_path, notice: tenement.errors.first || 'Success'
     end
@@ -36,7 +36,7 @@ module Hosting
     private
 
     def tenements_params
-      params.require(:tenement).permit(:title, :description, :price, :guests, :region, :property_type, :user_id)
+      params.require(:tenement).permit(:title, :description, :price, :guests, :region, :property_type)
     end
   end
 end
