@@ -17,13 +17,26 @@ class Booking < ApplicationRecord
   end
 
   def already_reserved
-    bookings = Booking.where(tenement_id: tenement_id)
     booking_range = arrive..departure
-    date_ranges = bookings.map { |booking| booking.arrive..booking.departure }
+    date_ranges = tenement.bookings.map { |booking| booking.arrive..booking.departure }
 
     date_ranges.each do |range|
-      errors.add(:tenement, 'already reserved by another') if range.include?(arrive) || range.include?(departure)
-      errors.add(:tenement, 'already reserved by another') if range.in?(booking_range)
+      if range.include?(arrive) || range.include?(departure) || range.in?(booking_range)
+        errors.add(:tenement, 'already reserved by another')
+      end
     end
   end
+
+  scope :booked, lambda { |arrive, departure|
+    arrive_inside(arrive).or(departure_inside(departure)).or(arrive_departure_outside(arrive, departure))
+  }
+  scope :arrive_inside, lambda { |arrive|
+    where('arrive <= ? AND departure >= ?', arrive, arrive).group(:id)
+  }
+  scope :departure_inside, lambda { |departure|
+    where('arrive <= ? AND departure >= ?', departure, departure).group(:id)
+  }
+  scope :arrive_departure_outside, lambda { |arrive, departure|
+    where('arrive >= ? AND departure <= ?', arrive, departure).group(:id)
+  }
 end

@@ -13,17 +13,5 @@ class Tenement < ApplicationRecord
   scope :filter_by_region, ->(region) { where('region LIKE ?', "%#{region}%") }
   scope :with_no_bookings, -> { where(bookings: { id: nil }) }
 
-  scope :booked, lambda { |arrive, departure|
-    arrive_inside(arrive).or(departure_inside(departure)).or(arrive_departure_outside(arrive, departure)).pluck(:id)
-  }
-  scope :not_reserved, ->(reserved_tenement_id) { where.not(bookings: { tenement_id: reserved_tenement_id }) }
-  scope :arrive_inside, lambda { |arrive|
-    where('arrive <= ? AND departure >= ?', arrive, arrive).group(:id)
-  }
-  scope :departure_inside, lambda { |departure|
-    where('arrive <= ? AND departure >= ?', departure, departure).group(:id)
-  }
-  scope :arrive_departure_outside, lambda { |arrive, departure|
-    where('arrive >= ? AND departure <= ?', arrive, departure).group(:id)
-  }
+  scope :not_reserved, ->(reserved_tenement_id) { where.not(bookings: { tenement_id: reserved_tenement_id }).group(:id) }
 end
