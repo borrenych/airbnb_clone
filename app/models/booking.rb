@@ -4,7 +4,7 @@ class Booking < ApplicationRecord
   belongs_to :tenement
   belongs_to :user
   validates :arrive, :departure, presence: true
-  validate :no_past_booking
+  validate :no_past_booking, on: :create
   validate :departure_after_arrive
   validate :already_reserved
 
