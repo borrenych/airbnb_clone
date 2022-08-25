@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 class Tenement < ApplicationRecord
-  belongs_to :property_type
   has_many :bookings, dependent: :destroy
   belongs_to :user
-  validates :title, :description, :price, :guests, :region, :property_type_id, :user_id, presence: true
+  validates :title, :description, :price, :guests, :region, :property_type, :user_id, presence: true
+
+  enum property_type: %w[House Apartment Guesthouse Hotel]
 
   scope :filter_by_price, ->(price) { where('price <= ?', price) }
   scope :filter_by_guests, ->(guests) { where('guests >= ?', guests) }
-  scope :filter_by_property_type_id, ->(property_type_id) { where(property_type_id: property_type_id) }
+  scope :filter_by_property_type, ->(property_type) { where(property_type: property_type) }
   scope :filter_by_region, ->(region) { where('region LIKE ?', "%#{region}%") }
   scope :with_no_bookings, -> { where(bookings: { id: nil }) }
 

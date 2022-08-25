@@ -9,7 +9,7 @@ module Hosting
     end
 
     def new
-      @types = PropertyType.all.pluck(:name, :id)
+      @property_types = Tenement.property_types
       @tenement = Tenement.new
     end
 
@@ -36,7 +36,7 @@ module Hosting
     private
 
     def tenements_params
-      params.require(:tenement).permit(:title, :description, :price, :guests, :region, :property_type_id, :user_id)
+      params.require(:tenement).permit(:title, :description, :price, :guests, :region, :property_type, :user_id)
     end
   end
 end

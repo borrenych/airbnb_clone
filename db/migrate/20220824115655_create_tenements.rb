@@ -8,8 +8,8 @@ class CreateTenements < ActiveRecord::Migration[6.1]
       t.integer :price
       t.integer :guests
       t.string :region
+      t.integer :property_type
       t.references :user, null: false, foreign_key: true
-      t.references :property_type, null: false, foreign_key: true
 
       t.timestamps
     end

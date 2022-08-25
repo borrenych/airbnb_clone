@@ -10,7 +10,7 @@ departure: <input type="date" id="inputDeparture" placeholder="Departure">
 
 <select>
   <option disabled selected value="">Property type</option>
-  <% @types.each do |type| %>
+  <% @property_types.each do |type| %>
     <option><%= type&.first %></option>
   <% end %>
 </select>
@@ -24,7 +24,7 @@ departure: <input type="date" id="inputDeparture" placeholder="Departure">
   <p align="center"> <%= "Region: #{tenement.region}" %></p>
   <p align="center"><%= "Price: #{tenement.price} $/day" %></p>
   <p align="center"><%= "Max guests: #{tenement.guests}" %></p>
-  <p align="center"><%= "Property_type: #{tenement.property_type.name}" %></p><br><hr>
+  <p align="center"><%= "Property_type: #{tenement.property_type}" %></p><br><hr>
 <% end %>
 
 <script>
@@ -35,6 +35,6 @@ departure: <input type="date" id="inputDeparture" placeholder="Departure">
     let type = document.getElementsByTagName('select')[0].value
     let arrive = document.getElementsByTagName('input')[3].value
     let departure = document.getElementsByTagName('input')[4].value
-    window.location.replace(`http://${window.location.host}/tenements/?price=${price}&guests=${guests}&property_type_id=${type}&region=${region}&arrive=${arrive}&departure=${departure}`)
+    window.location.replace(`http://${window.location.host}/tenements/?price=${price}&guests=${guests}&property_type=${type}&region=${region}&arrive=${arrive}&departure=${departure}`)
   }
 </script>

@@ -23,10 +23,10 @@ class TenementsController < ApplicationController
   private
 
   def property_types
-    @types = PropertyType.all.pluck(:name, :id)
+    @property_types = Tenement.property_types
   end
 
   def filtering_params(params)
-    params.slice(:price, :guests, :property_type_id, :region)
+    params.slice(:price, :guests, :property_type, :region)
   end
 end

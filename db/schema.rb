@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,55 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_824_115_742) do
+ActiveRecord::Schema.define(version: 2022_08_24_115742) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'bookings', force: :cascade do |t|
-    t.bigint 'tenement_id', null: false
-    t.bigint 'user_id', null: false
-    t.date 'arrive'
-    t.date 'departure'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['tenement_id'], name: 'index_bookings_on_tenement_id'
-    t.index ['user_id'], name: 'index_bookings_on_user_id'
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "tenement_id", null: false
+    t.bigint "user_id", null: false
+    t.date "arrive"
+    t.date "departure"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tenement_id"], name: "index_bookings_on_tenement_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-  create_table 'property_types', force: :cascade do |t|
-    t.string 'name'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "tenements", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "price"
+    t.integer "guests"
+    t.string "region"
+    t.integer "property_type"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tenements_on_user_id"
   end
 
-  create_table 'tenements', force: :cascade do |t|
-    t.string 'title'
-    t.text 'description'
-    t.integer 'price'
-    t.integer 'guests'
-    t.string 'region'
-    t.bigint 'user_id', null: false
-    t.bigint 'property_type_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['property_type_id'], name: 'index_tenements_on_property_type_id'
-    t.index ['user_id'], name: 'index_tenements_on_user_id'
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.index ['email'], name: 'index_users_on_email', unique: true
-    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
-  end
-
-  add_foreign_key 'bookings', 'tenements'
-  add_foreign_key 'bookings', 'users'
-  add_foreign_key 'tenements', 'property_types'
-  add_foreign_key 'tenements', 'users'
+  add_foreign_key "bookings", "tenements"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "tenements", "users"
 end
