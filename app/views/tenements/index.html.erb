@@ -10,7 +10,7 @@ departure: <input type="date" id="inputDeparture" placeholder="Departure">
 
 <select>
   <option disabled selected value="">Property type</option>
-  <% @property_types.each do |type| %>
+  <% Tenement.property_types.each do |type| %>
     <option><%= type&.first %></option>
   <% end %>
 </select>

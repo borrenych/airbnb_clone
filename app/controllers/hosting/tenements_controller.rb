@@ -9,7 +9,6 @@ module Hosting
     end
 
     def new
-      @property_types = Tenement.property_types
       @tenement = Tenement.new
     end
 

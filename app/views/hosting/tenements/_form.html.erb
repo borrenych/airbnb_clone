@@ -26,7 +26,7 @@
 
   <div class="field">
     <%= form.label :property_type %>
-    <%= form.select :property_type, @property_types.keys %>
+    <%= form.select :property_type, Tenement.property_types %>
   </div>
 
   <div class="actions">
