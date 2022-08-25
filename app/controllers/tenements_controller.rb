@@ -5,7 +5,7 @@ class TenementsController < ApplicationController
   before_action :property_types, only: %i[index]
 
   def index
-    @tenements = TenementsSearcher.call(Tenement.all, filtering_params)
+    @tenements = TenementsSearcher.call(filtering_params)
     if params[:arrive].present? && params[:departure].present?
       @tenements = AvailableByDatesTenementsGetter.call(@tenements, params[:arrive],
                                                         params[:departure])
