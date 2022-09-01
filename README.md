@@ -1,9 +1,13 @@
+Clone this app. 
+"docker-compose build" for building project.
+"docker-compose up" for starting project.
+
 Technical test Ruby on Rails
 Task: develop a clone of airbnb.
 The main priority was the development of a booking system, search places by multiple params (including booking days). Also there was task to separating host-guest abilities.
 
 Technologies: 
-- ruby 2.7.0
+- ruby 2.7.4
 - rails 6
 - Rubocop for code quality
 - postgresql
