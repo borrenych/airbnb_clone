@@ -1,8 +1,11 @@
 <%= render 'layouts/guest_menu' %>
-<h1 align="center">My Bookings</h1>
-<% @bookings.each do |booking| %>
-  <p align="center">Title: <%=  link_to booking.tenement.title, booking.tenement %></p>
-  <p align="center">Dates: <%= "#{booking.arrive} - #{booking.departure}" %></p>
-  <p align="center"><%= link_to 'Destroy', booking_path(booking), method: :delete, data: { confirm: 'Are you sure?'} %></p>
-  <hr>
-<% end %>
+<div class="container">
+  <div class="title">My Bookings</div>
+  <% @bookings.each do |booking| %>
+    <div class="element-container">
+      <p>Title: <%=  link_to booking.tenement.title, booking.tenement %></p>
+      <p>Dates: <%= "#{booking.arrive} - #{booking.departure}" %></p>
+      <p><%= link_to 'Destroy', booking_path(booking), method: :delete, data: { confirm: 'Are you sure?'} %></p>
+    </div>
+  <% end %>
+</div>

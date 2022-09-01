@@ -1,40 +1,42 @@
 <%= render 'layouts/guest_menu' %>
-<h1 align="center">Tenements</h1>
+<div class="container">
+  <div class="title">Tenements</div>
+    <div>
+      <input type="text" id="inputRegion" placeholder="Find by region">
+      <input type="number" id="inputPrice" placeholder="Max price">
+      <input type="number" id="inputGuests" placeholder="Guests">
+      arrive: <input type="date" id="inputArrive" placeholder="Arrive">
+      departure: <input type="date" id="inputDeparture" placeholder="Departure">
 
-<input type="text" placeholder="Find by region">
-<input type="number" placeholder="Max price">
-<input type="number" placeholder="Guests">
-arrive: <input type="date" id="inputArrive" placeholder="Arrive">
-departure: <input type="date" id="inputDeparture" placeholder="Departure">
+      <select id="selectType">
+        <option disabled selected value="">Property type</option>
+        <% Tenement.property_types.each do |type| %>
+          <option><%= type&.first %></option>
+        <% end %>
+      </select>
 
-
-<select>
-  <option disabled selected value="">Property type</option>
-  <% Tenement.property_types.each do |type| %>
-    <option><%= type&.first %></option>
+      <button type="button" onclick="filterTenements()">Select</button>
+    </div>
+  <% @tenements.each do |tenement| %>
+    <div class="tenement-container">
+      <p><%=  link_to tenement.title, tenement %></p>
+      <p> <%= "Region: #{tenement.region}" %></p>
+      <p><%= "Price: #{tenement.price} $/day" %></p>
+      <p><%= "Max guests: #{tenement.guests}" %></p>
+      <p><%= "Property_type: #{tenement.property_type}" %></p>
+    </div>
   <% end %>
-</select>
-
-
-<button type="button" onclick="filterTenements()">Select</button>
-</h3>
-
-<% @tenements.each do |tenement| %>
-  <p align="center"><%=  link_to tenement.title, tenement %></p>
-  <p align="center"> <%= "Region: #{tenement.region}" %></p>
-  <p align="center"><%= "Price: #{tenement.price} $/day" %></p>
-  <p align="center"><%= "Max guests: #{tenement.guests}" %></p>
-  <p align="center"><%= "Property_type: #{tenement.property_type}" %></p><br><hr>
-<% end %>
+</div>
 
 <script>
   function filterTenements(){
-    let region = document.getElementsByTagName('input')[0].value
-    let price = document.getElementsByTagName('input')[1].value
-    let guests = document.getElementsByTagName('input')[2].value
-    let type = document.getElementsByTagName('select')[0].value
-    let arrive = document.getElementsByTagName('input')[3].value
-    let departure = document.getElementsByTagName('input')[4].value
+    let region = document.getElementById('inputRegion').value
+    let price = document.getElementById('inputPrice').value
+    let guests = document.getElementById('inputGuests').value
+    let type = document.getElementById('selectType').value
+    let arrive = document.getElementById('inputArrive').value
+    let departure = document.getElementById('inputDeparture').value
+
     window.location.replace(`http://${window.location.host}/tenements/?price=${price}&guests=${guests}&property_type=${type}&region=${region}&arrive=${arrive}&departure=${departure}`)
   }
 </script>

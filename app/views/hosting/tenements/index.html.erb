@@ -1,11 +1,15 @@
 <%= render 'layouts/hosting_menu' %>
-<h1 align="center">My Tenements</h1>
-<p align="center"><%= link_to 'Add new tenement', new_hosting_tenement_path(@tenement) %></td></p><br>
+<div class="container">
+  <div class="title">My Tenements</div>
+  <p><%= link_to 'Add new tenement', new_hosting_tenement_path(@tenement) %></td></p><br>
 
-<% @tenements.each do |tenement| %>
-  <p align="center"><%=  link_to tenement.title, hosting_tenement_url(tenement) %></p>
-  <p align="center"> <%= "Region: #{tenement.region}" %></p>
-  <p align="center"><%= "Price: #{tenement.price} $/day" %></p>
-  <p align="center"><%= "Max guests: #{tenement.guests}" %></p>
-  <p align="center"><%= "Property_type: #{tenement.property_type}" %></p><br><hr>
-<% end %>
+  <% @tenements.each do |tenement| %>
+    <div class="element-container">
+      <p><%=  link_to tenement.title, hosting_tenement_url(tenement) %></p>
+      <p> <%= "Region: #{tenement.region}" %></p>
+      <p><%= "Price: #{tenement.price} $/day" %></p>
+      <p><%= "Max guests: #{tenement.guests}" %></p>
+      <p><%= "Property_type: #{tenement.property_type}" %></p>
+    </div>
+  <% end %>
+</div>
