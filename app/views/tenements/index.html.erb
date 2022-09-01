@@ -18,7 +18,7 @@
       <button type="button" onclick="filterTenements()">Select</button>
     </div>
   <% @tenements.each do |tenement| %>
-    <div class="tenement-container">
+    <div class="element-container">
       <p><%=  link_to tenement.title, tenement %></p>
       <p> <%= "Region: #{tenement.region}" %></p>
       <p><%= "Price: #{tenement.price} $/day" %></p>
