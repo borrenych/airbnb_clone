@@ -17,14 +17,7 @@ class Booking < ApplicationRecord
   end
 
   def already_reserved
-    booking_range = arrive..departure
-    date_ranges = tenement.bookings.map { |booking| booking.arrive..booking.departure }
-
-    date_ranges.each do |range|
-      if range.include?(arrive) || range.include?(departure) || range.in?(booking_range)
-        errors.add(:tenement, 'already reserved by another')
-      end
-    end
+    errors.add(:tenement, 'already reserved by another') if tenement.bookings.booked(arrive, departure).exists?
   end
 
   scope :booked, lambda { |arrive, departure|
