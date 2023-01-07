@@ -5,10 +5,10 @@ class TenementsController < ApplicationController
 
   def index
     @tenements = TenementsSearcher.call(filtering_params)
-    if params[:arrive].present? && params[:departure].present?
-      @tenements = AvailableByDatesTenementsGetter.call(@tenements, params[:arrive],
-                                                        params[:departure])
-    end
+    return unless params[:arrive].present? && params[:departure].present?
+
+    @tenements = AvailableByDatesTenementsGetter.call(@tenements, params[:arrive],
+                                                      params[:departure])
   end
 
   def show
