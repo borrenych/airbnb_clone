@@ -9,4 +9,3 @@ module AvailableByDatesTenementsGetter
     tenements.not_reserved(reserved_tenements).or(tenements.with_no_bookings).sort
   end
 end
-
