@@ -42,7 +42,6 @@ jobs:
       with:
         terraform_version: 1.1.9
         terraform_wrapper: false
-        cli_config_credentials_token: ${{ secrets.YTOKEN }}
         
     - name: Terraform Init
       id: init
@@ -51,8 +50,6 @@ jobs:
     - name: Terraform Format
       id: fmt
       run: terraform fmt -check
-      env:
-        TF_ACTION_WORKING_DIR: .
       continue-on-error: true
 
     - name: Terraform Validate
