@@ -20,7 +20,7 @@ data "yandex_compute_image" "ubuntu_image" {
   family = "ubuntu-2204-lts"
 }
 
-resource "yandex_compute_instance" "vm_configdemo" {
+resource "yandex_compute_instance" "default" {
   name = "configdemo_vm"
   allow_stopping_for_update = true
   platform_id = "standard-v1"
