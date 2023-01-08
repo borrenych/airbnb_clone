@@ -3,7 +3,7 @@ output "default_instance_public_ip" {
 }
 
 output "subnet_id" {
-    value = yandex_vpc_subnet.network_id
+    value = yandex_vpc_subnet.subnet_terraform.network_id
 }
 
 output "ubuntu" {

@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "yandex" {
-	token     = ${{ secrets.Ytoken }}
+	token     = var.YTOKEN
 	cloud_id  = var.yandex_cloud_id
 	folder_id = var.yandex_folder_id
 	zone 	  = var.yandex_zone
@@ -21,7 +21,7 @@ data "yandex_compute_image" "ubuntu_image" {
 }
 
 resource "yandex_compute_instance" "vm_configdemo" {
-  name = "configdemo_vm"
+  name = "configdemo"
   allow_stopping_for_update = true
   platform_id = "standard-v1"
 
@@ -35,10 +35,6 @@ resource "yandex_compute_instance" "vm_configdemo" {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu_image.id
     }
-  }
-  
-  metadata = {
-	ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 
   network_interface {

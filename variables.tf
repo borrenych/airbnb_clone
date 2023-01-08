@@ -24,11 +24,16 @@ variable "yandex_subnet" {
 }
 
 variable "yandex_cores" {
-  type        = int
+  type        = number
   default     = 2
 }
 
 variable "yandex_memory" {
-  type        = int
+  type        = number
   default     = 1
+}
+
+variable "YTOKEN" {
+  type = string
+  default = "y0_AgAAAAA6RBHiAATuwQAAAADZNOxBNdWgOU5XTj2ELRZa6fQr5ty0oao"
 }
