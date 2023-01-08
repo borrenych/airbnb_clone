@@ -36,10 +36,6 @@ resource "yandex_compute_instance" "vm_configdemo" {
       image_id = data.yandex_compute_image.ubuntu_image.id
     }
   }
-  
-  metadata = {
-	ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
-  }
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet_terraform.id
