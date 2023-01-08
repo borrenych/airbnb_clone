@@ -24,12 +24,12 @@ variable "yandex_subnet" {
 }
 
 variable "yandex_cores" {
-  type        = int
+  type        = number
   default     = 2
 }
 
 variable "yandex_memory" {
-  type        = int
+  type        = number
   default     = 1
 }
 
