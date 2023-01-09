@@ -53,3 +53,29 @@ resource "yandex_vpc_subnet" "subnet_terraform" {
   network_id     = yandex_vpc_network.network_terraform.id
   v4_cidr_blocks = ["10.128.0.0/24"]
 }
+
+resource "yandex_iam_service_account" "sa" {
+  name        = var.yandex_repository_name
+  folder_id   = var.yandex_folder_id
+}
+
+resource "yandex_resourcemanager_folder_iam_binding" "admin-account-iam" {
+  folder_id   = var.yandex_folder_id
+  role        = "admin"
+  members     = [
+    "serviceAccount:yandex_iam_service_account.sa.id",
+  ]
+}
+
+resource "yandex_iam_service_account_key" "sa-auth-key" {
+  service_account_id = yandex_iam_service_account.sa.id
+  key_algorithm      = "RSA_2048"
+}
+
+resource "yandex_container_registry" "my-reg" {
+  name = "configdemoregistry"
+  folder_id = var.yandex_folder_id
+  labels = {
+    my-label = "docker"
+  }
+}

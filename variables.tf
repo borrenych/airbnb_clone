@@ -33,6 +33,11 @@ variable "yandex_memory" {
   default     = 1
 }
 
+variable "yandex_repository_name" {
+  type        = string
+  default     = "sa_default"
+}
+
 variable "YTOKEN" {
   type = string
   default = "y0_AgAAAAA6RBHiAATuwQAAAADZNOxBNdWgOU5XTj2ELRZa6fQr5ty0oao"
