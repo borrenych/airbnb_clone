@@ -33,9 +33,9 @@ variable "yandex_memory" {
   default     = 1
 }
 
-variable "yandex_repository_name" {
+variable "yandex_account_name" {
   type        = string
-  default     = "sa_default"
+  default     = "configdemoman"
 }
 
 variable "YTOKEN" {
