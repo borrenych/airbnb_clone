@@ -1,0 +1,56 @@
+name: 'Deploy'
+
+on:
+  workflow_dispatch:
+  
+  push:
+    branches:
+    - main
+    - master
+        
+  pull_request:
+    branches:
+    - main
+    - master
+        
+  release:
+    types:
+    - published
+    - created
+
+jobs:
+          
+  deploy:
+    runs-on: ubuntu-latest
+        
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Yandex Cloud CR "Login" Action for GitHub Actions
+      uses: yc-actions/yc-cr-login@v1
+      with:
+        yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+    - name: Build and push docker-image to Yandex Cloud Container Registry
+      env:
+        CR_REGISTRY: ...
+        CR_REPOSITORY: configdemorep
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
+        docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+    
+    - name: Deploy COI VM
+      id: deploy-coi
+      uses: yc-actions/yc-coi-deploy@v1
+      env:
+        IMAGE_URL: cr.yandex/.../configdemorep:${{ github.sha }}
+      with:
+        yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        folder-id: b1gcl6pjk909rqur75n8
+        vm-name: configdemo
+        vm-service-account-name: sa_default
+        vm-subnet-id: ...
+        user-data-path: './user-data.yml'
+        docker-compose-path: './docker-compose.yml'
