@@ -10,6 +10,6 @@ output "subnet_id" {
     value = yandex_vpc_subnet.subnet_terraform.network_id
 }
 
-output "ubuntu" {
+output "registry_id" {
     value = yandex_container_registry.my-reg.id
 }
