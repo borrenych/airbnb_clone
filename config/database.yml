@@ -17,7 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
+  host: localhost
   username: postgres
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
@@ -84,4 +84,5 @@ test:
 production:
   <<: *default
   database: airbnb_clone_production
-  url: <%= ENV['DATABASE_URL'] %>
+  username: airbnb_clone
+  password: <%= ENV['AIRBNB_CLONE_DATABASE_PASSWORD'] %>
