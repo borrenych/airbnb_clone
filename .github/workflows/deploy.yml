@@ -34,7 +34,7 @@ jobs:
 
     - name: Build and push docker-image to Yandex Cloud Container Registry
       env:
-        CR_REGISTRY: crp89ao90aanunpg4cct
+        CR_REGISTRY: crpbhg2uuns8b3uv9p8r
         CR_REPOSITORY: configdemorep
         IMAGE_TAG: ${{ github.sha }}
       run: |
@@ -45,7 +45,7 @@ jobs:
       id: deploy-coi
       uses: yc-actions/yc-coi-deploy@v1
       env:
-        CR_REGISTRY: crp89ao90aanunpg4cct
+        CR_REGISTRY: crpbhg2uuns8b3uv9p8r
         CR_REPOSITORY: configdemorep
         IMAGE_TAG: ${{ github.sha }}
       with:
@@ -53,13 +53,13 @@ jobs:
         folder-id: b1gcl6pjk909rqur75n8
         vm-name: configdemo
         vm-service-account-id: aje71n4sv8q3577pqiqo
-        vm-subnet-id: enpghhj2970tul80dpp0
+        vm-subnet-id: e9bbjo56q8rs5cuik4di
         user-data-path: './user-data.yml'
         docker-compose-path: './docker-compose.yml'
         
     - name: Pull and run docker-image on VM
       env:
-        CR_REGISTRY: crp89ao90aanunpg4cct
+        CR_REGISTRY: crpbhg2uuns8b3uv9p8r
         CR_REPOSITORY: configdemorep
         IMAGE_TAG: ${{ github.sha }}
       run: |
