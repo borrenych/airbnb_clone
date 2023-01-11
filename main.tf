@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "yandex" {
-	token     = "${{ secrets.YTOKEN }}"
+	token     = var.YTOKEN
 	cloud_id  = var.yandex_cloud_id
 	folder_id = var.yandex_folder_id
 	zone 	  = var.yandex_zone
@@ -26,7 +26,7 @@ resource "yandex_compute_instance" "vm_configdemo" {
   platform_id = "standard-v1"
 
   resources {
-	core_fraction = 10
+	core_fraction = 20
     cores  = var.yandex_cores
     memory = var.yandex_memory
   }
