@@ -50,7 +50,7 @@ jobs:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
         folder-id: b1gcl6pjk909rqur75n8
         vm-name: configdemo
-        vm-service-account-name: configdemoman
+        vm-service-account-id: aje71n4sv8q3577pqiqo
         vm-subnet-id: enposvmtu874oglgr2ck
         user-data-path: './user-data.yml'
         docker-compose-path: './docker-compose.yml'
