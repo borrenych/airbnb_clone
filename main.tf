@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "yandex" {
-	token     = var.YTOKEN
+	token     = "${{ secrets.YTOKEN }}"
 	cloud_id  = var.yandex_cloud_id
 	folder_id = var.yandex_folder_id
 	zone 	  = var.yandex_zone
@@ -26,7 +26,7 @@ resource "yandex_compute_instance" "vm_configdemo" {
   platform_id = "standard-v1"
 
   resources {
-	core_fraction = 20
+	core_fraction = 10
     cores  = var.yandex_cores
     memory = var.yandex_memory
   }
@@ -38,8 +38,16 @@ resource "yandex_compute_instance" "vm_configdemo" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet_terraform.id
+    subnet_id = "${yandex_vpc_subnet.subnet_terraform.id}"
     nat       = true
+  }
+  
+  metadata = {
+    ssh-keys = "admin:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBIJVf/UyGo9ATlcfakxtct05T0crxnf/0sJVgVXZEcN Shelaev.NR@3530901_80201"
+  }
+
+  scheduling_policy {
+    preemptible = true
   }
 }
 
@@ -50,14 +58,8 @@ resource "yandex_vpc_network" "network_terraform" {
 resource "yandex_vpc_subnet" "subnet_terraform" {
   name           = var.yandex_subnet
   zone           = var.yandex_zone
-  network_id     = yandex_vpc_network.network_terraform.id
+  network_id     = "${yandex_vpc_network.network_terraform.id}"
   v4_cidr_blocks = ["10.128.0.0/24"]
-}
-
-resource "yandex_iam_service_account" "sa" {
-  name        = var.yandex_account_name
-  description = "service account to manage VMs"
-  folder_id   = var.yandex_folder_id
 }
 
 resource "yandex_container_registry" "my-reg" {

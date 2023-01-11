@@ -37,8 +37,3 @@ variable "yandex_account_name" {
   type        = string
   default     = "configdemoman"
 }
-
-variable "YTOKEN" {
-  type = string
-  default = "y0_AgAAAAA6RBHiAATuwQAAAADZNOxBNdWgOU5XTj2ELRZa6fQr5ty0oao"
-}
