@@ -45,7 +45,9 @@ jobs:
       id: deploy-coi
       uses: yc-actions/yc-coi-deploy@v1
       env:
-        IMAGE_URL: cr.yandex/crp89ao90aanunpg4cct/configdemorep:${{ github.sha }}
+        CR_REGISTRY: crp89ao90aanunpg4cct
+        CR_REPOSITORY: configdemorep
+        IMAGE_TAG: ${{ github.sha }}
       with:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
         folder-id: b1gcl6pjk909rqur75n8
