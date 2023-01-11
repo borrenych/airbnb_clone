@@ -38,8 +38,16 @@ resource "yandex_compute_instance" "vm_configdemo" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet_terraform.id
+    subnet_id = "${yandex_vpc_subnet.subnet_terraform.id}"
     nat       = true
+  }
+  
+  metadata = {
+    user-data = "${file("./user-data.yml")}"
+  }
+
+  scheduling_policy {
+    preemptible = true
   }
 }
 
@@ -50,14 +58,8 @@ resource "yandex_vpc_network" "network_terraform" {
 resource "yandex_vpc_subnet" "subnet_terraform" {
   name           = var.yandex_subnet
   zone           = var.yandex_zone
-  network_id     = yandex_vpc_network.network_terraform.id
+  network_id     = "${yandex_vpc_network.network_terraform.id}"
   v4_cidr_blocks = ["10.128.0.0/24"]
-}
-
-resource "yandex_iam_service_account" "sa" {
-  name        = var.yandex_account_name
-  description = "service account to manage VMs"
-  folder_id   = var.yandex_folder_id
 }
 
 resource "yandex_container_registry" "my-reg" {
