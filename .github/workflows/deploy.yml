@@ -34,7 +34,7 @@ jobs:
 
     - name: Build and push docker-image to Yandex Cloud Container Registry
       env:
-        CR_REGISTRY: crpu6b9tv0ml15erfn6c
+        CR_REGISTRY: crpb5jitavnqq0v8n4nd
         CR_REPOSITORY: configdemorep
         IMAGE_TAG: ${{ github.sha }}
       run: |
@@ -45,12 +45,12 @@ jobs:
       id: deploy-coi
       uses: yc-actions/yc-coi-deploy@v1
       env:
-        IMAGE_URL: cr.yandex/crpu6b9tv0ml15erfn6c/configdemorep:${{ github.sha }}
+        IMAGE_URL: cr.yandex/crpb5jitavnqq0v8n4nd/configdemorep:${{ github.sha }}
       with:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
         folder-id: b1gcl6pjk909rqur75n8
         vm-name: configdemo
         vm-service-account-id: aje71n4sv8q3577pqiqo
-        vm-subnet-id: enposvmtu874oglgr2ck
+        vm-subnet-id: e9bmu9a8ql0n5149vtpr
         user-data-path: './user-data.yml'
         docker-compose-path: './docker-compose.yml'
