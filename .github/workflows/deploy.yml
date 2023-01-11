@@ -54,6 +54,3 @@ jobs:
         vm-subnet-id: enpghhj2970tul80dpp0
         user-data-path: './user-data.yml'
         docker-compose-path: './docker-compose.yml'
-      run : |
-        docker pull $IMAGE_URL .
-        docker run $IMAGE_URL
