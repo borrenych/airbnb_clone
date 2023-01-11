@@ -63,5 +63,5 @@ jobs:
         CR_REPOSITORY: configdemorep
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker pull cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
+        docker pull cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
         docker run cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
