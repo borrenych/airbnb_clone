@@ -43,7 +43,7 @@ resource "yandex_compute_instance" "vm_configdemo" {
   }
   
   metadata = {
-    ssh-keys = "admin:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBIJVf/UyGo9ATlcfakxtct05T0crxnf/0sJVgVXZEcN Shelaev.NR@3530901_80201"
+    user-data = "${file("./user-data.yml")}"
   }
 
   scheduling_policy {
