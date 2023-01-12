@@ -56,12 +56,3 @@ jobs:
         vm-subnet-id: e9bpp4emqv37594l16q8
         user-data-path: './user-data.yml'
         docker-compose-path: './docker-compose.yml'
-        
-    - name: Pull and run docker-image on VM
-      env:
-        CR_REGISTRY: crpmg280ovlghju3udt3
-        CR_REPOSITORY: configdemorep
-        IMAGE_TAG: ${{ github.sha }}
-      run: |
-        docker pull cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
-        docker run cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
