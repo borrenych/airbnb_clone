@@ -18,6 +18,8 @@ provider "yandex" {
 
 data "yandex_compute_image" "ubuntu_image" {
   family = "ubuntu-2204-lts"
+  name   = "configdemohdd"
+  size   = var.yandex_disk_size
 }
 
 resource "yandex_compute_instance" "vm_configdemo" {
@@ -60,6 +62,11 @@ resource "yandex_vpc_subnet" "subnet_terraform" {
   zone           = var.yandex_zone
   network_id     = "${yandex_vpc_network.network_terraform.id}"
   v4_cidr_blocks = ["10.128.0.0/24"]
+}
+
+resource "yandex_iam_service_account" "sa" {
+  name        = var.yandex_account_name
+  folder_id   = var.yandex_folder_id
 }
 
 resource "yandex_container_registry" "my-reg" {
