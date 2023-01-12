@@ -64,11 +64,6 @@ resource "yandex_vpc_subnet" "subnet_terraform" {
   v4_cidr_blocks = ["10.128.0.0/24"]
 }
 
-resource "yandex_iam_service_account" "sa" {
-  name        = var.yandex_account_name
-  folder_id   = var.yandex_folder_id
-}
-
 resource "yandex_container_registry" "my-reg" {
   name = "configdemoregistry"
   folder_id = var.yandex_folder_id
