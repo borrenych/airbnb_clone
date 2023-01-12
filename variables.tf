@@ -8,11 +8,6 @@ variable "yandex_folder_id" {
   default     = "b1gcl6pjk909rqur75n8"
 }
 
-variable "yandex_disk_size" {
-  type    = number
-  default = 15
-}
-
 variable "yandex_zone" {
   type        = string
   default     = "ru-central1-a"

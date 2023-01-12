@@ -19,7 +19,6 @@ provider "yandex" {
 data "yandex_compute_image" "ubuntu_image" {
   family = "ubuntu-2204-lts"
   name   = "configdemohdd"
-  size   = var.yandex_disk_size
 }
 
 resource "yandex_compute_instance" "vm_configdemo" {
